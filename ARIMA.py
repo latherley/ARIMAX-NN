@@ -5,24 +5,29 @@ Created on Wed Jul 11 08:53:34 2018
 @author: atherll
 """
 import pandas as pd
-import numpy as np
-from statsmodels.tsa.arima_model import ARIMA
-from matplotlib import pyplot
+import pymc3 as pm
+import matplotlib.pyplot as plt
 
-series = pd.read_excel('timeseries.xlsx', header=0, parse_dates=[0], index_col=0, squeeze=True)
+df = pd.read_excel('timeseries.xlsx')
 
-# fit model
-model = ARIMA(series, order=(5,1,0))
-model_fit = model.fit(disp=0)
-print(model_fit.summary())
+plt.plot(df['Date'],df['Person Rate'])
+plt.title('Crime Over Time')
+plt.xlabel('Date')
+plt.ylabel('Person Rate')
+plt.show()
 
-# plot residual errors
-residuals = DataFrame(model_fit.resid)
-residuals.plot()
-pyplot.show()
-residuals.plot(kind='kde')
-pyplot.show()
-print(residuals.describe())
-
-
-np.asarray(series)
+df['lag'] = df['Person Rate'].shift()
+df.dropna(inplace=True)
+with pm.Model() as model:
+    sigma = pm.Exponential('sigma', 1./.02, testval=.1)
+    nu = pm.Exponential('nu', 1./10)
+    beta = pm.GaussianRandomWalk('beta',sigma**-2,shape=len(df['Person Rate']))
+    observed = pm.Normal('observed', mu=beta*df['lag'], sd = 1/nu, observed = df['Person Rate'])
+    
+    trace = pm.sample()
+    
+plt.plot(df.index,trace['beta'].T, 'b', alpha=.03)
+plt.title('Person Rate Growth Rate')
+plt.xlabel('Date')
+plt.ylabel('Growth Rate')
+plt.show()
