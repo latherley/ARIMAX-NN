@@ -1,7 +1,0 @@
-
-Part 6: Time Series Prediction with Neural Networks in Python
-http://dacatay.com/data-science/part-6-time-series-prediction-neural-networks-python/
-
-NOAA Documentation
-https://www1.ncdc.noaa.gov/pub/data/cdo/documentation/GHCND_documentation.pdf
-
