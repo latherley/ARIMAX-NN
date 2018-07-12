@@ -19,3 +19,4 @@ ax2 = fig.add_subplot(212)
 fig = sm.graphics.tsa.plot_pacf(df['Person Rate'], lags = 40, ax=ax2)
 plt.show()
 
+print(sm.tsa.stattools.adfuller('Person Rate', maxlag=None)
