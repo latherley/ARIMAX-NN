@@ -14,3 +14,6 @@ http://barnesanalytics.com/basics-of-arima-models-with-statsmodels-in-python
 
 Augmented Dicky Fuller - Unit Root Test for Stationarity 
 https://machinelearningmastery.com/time-series-data-stationary-python/
+
+SARIMAX
+http://www.statsmodels.org/dev/examples/notebooks/generated/statespace_sarimax_stata.html
