@@ -51,3 +51,31 @@ def auto_partial_autocorrelation(timeseries):
     plt.show()
     
 auto_partial_autocorrelation(df['Onview Rate'])
+
+import numpy as np
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+def decompose(timeseries):
+    
+    ts_log = np.log(timeseries)
+    decomposition = seasonal_decompose(ts_log)
+    
+    trend = decomposition.trend
+    seasonal = decomposition.seasonal
+    residual = decomposition.resid
+    
+    plt.subplot(411)
+    plt.plot(ts_log, label='Original')
+    plt.legend(loc='best')
+    plt.subplot(412)
+    plt.plot(trend, label='Trend')
+    plt.legend(loc='best')
+    plt.subplot(413)
+    plt.plot(seasonal,label='Seasonality')
+    plt.legend(loc='best')
+    plt.subplot(414)
+    plt.plot(residual, label='Residuals')
+    plt.legend(loc='best')
+    plt.tight_layout()
+    
+decompose(df['Dispatch Rate'])
