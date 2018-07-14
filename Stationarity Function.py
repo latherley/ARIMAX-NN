@@ -50,6 +50,7 @@ def auto_partial_autocorrelation(timeseries):
     ax2.set_title('Crime Rate - Partial Autocorrelation')
     plt.show()
     
+    
 auto_partial_autocorrelation(df['Onview Rate'])
 
 import numpy as np
@@ -79,3 +80,12 @@ def decompose(timeseries):
     plt.tight_layout()
     
 decompose(df['Dispatch Rate'])
+
+def difference(timeseries):
+
+    ts_log_diff = np.log(timeseries) - np.log(timeseries).shift()
+    plt.plot(ts_log_diff)
+
+    ts_log_diff.dropna(inplace=True)
+
+difference(df['Crime Rate'])
