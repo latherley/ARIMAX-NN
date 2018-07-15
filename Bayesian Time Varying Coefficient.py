@@ -11,12 +11,6 @@ import matplotlib.pyplot as plt
 
 df = pd.read_excel('timeseries.xlsx')
 
-plt.plot(df['Date'],df['Dispatch Rate'])
-plt.title('DR over Time')
-plt.xlabel('Date')
-plt.ylabel('Dispatch Rate')
-plt.show()
-
 df['DRlag'] = df['Dispatch Rate'].shift()
 df.dropna(inplace=True)
 with pm.Model() as model:
