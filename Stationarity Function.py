@@ -89,3 +89,23 @@ def difference(timeseries):
     ts_log_diff.dropna(inplace=True)
 
 difference(df['Crime Rate'])
+
+import cufflinks as cf
+from pyramid import auto_arima
+
+def a_arima(timeseries):
+    
+    stepwise_model = auto_arima(timeseries, start_p=1, start_q=1,
+                               max_p=3, max_q=3, m=12,
+                               start_P=0, seasonal=True,
+                               d=1, D=1, trace=True,
+                               error_action='ignore',  
+                               suppress_warnings=True, 
+                               stepwise=True)
+    #print(stepwise_model.aic())
+
+#df['Year'] = pd.to_datetime(df['Year'])
+train = df.Date['2009-06-02 00:00:00':'2017-12-31 00:00:00']
+test = df.Year['2018-01-01 00:00:00':]
+
+a_arima(df['Onview Rate'])

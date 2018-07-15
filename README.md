@@ -20,3 +20,12 @@ http://www.statsmodels.org/dev/examples/notebooks/generated/statespace_sarimax_s
 
 Complete Guide to Time Series
 https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/
+
+Using Python and Auto ARIMA to Forecase Seasonal Time Series (awesome... requires up to date visual studio to install pyramid-arima)
+https://medium.com/@josemarcialportilla/using-python-and-auto-arima-to-forecast-seasonal-time-series-90877adff03c
+
+Akaike Information Criterion (AIC) for model fit / selection
+https://en.wikipedia.org/wiki/Akaike_information_criterion
+
+Bayesian Information Criterion (BIC) fro model fit / selection 
+https://en.wikipedia.org/wiki/Bayesian_information_criterion
