@@ -93,6 +93,8 @@ difference(df['Crime Rate'])
 import cufflinks as cf
 from pyramid import auto_arima
 
+
+
 def a_arima(timeseries):
     
     stepwise_model = auto_arima(timeseries, start_p=1, start_q=1,
@@ -109,10 +111,10 @@ def a_arima(timeseries):
     test = df.loc['2018-01-01 00:00:00':]
     
     # Train the Model
-    stepwise_model.fit(train, drop=['Date','occ date','year'])
+    stepwise_model.fit(train)
 
     future_forecast = stepwise_model.predict(n_periods=182)
-    future_forecast = pd.DataFrame(future_forecast, index = test.index, column=['Prediction'], drop=['Date','occ date','year'])
+    future_forecast = pd.DataFrame(future_forecast, index = test.index, column=['Prediction'])
     pd.concat([test,future_forecast],axis=1).iplot()
 
 a_arima(df['Onview Rate'])
