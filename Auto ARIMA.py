@@ -8,13 +8,17 @@ Created on Tue Jul 24 14:48:21 2018
 
 import pandas as pd
 from pyramid.arima import auto_arima
+from sklearn.preprocessing import LabelEncoder
+
 
 df = pd.read_excel('timeseries.xlsx')
 df.index = pd.DatetimeIndex(data = df['Date'], freq="d", start = 0, periods = 3321)
 pd.to_datetime(df['Date'])
+le = LabelEncoder()
+df_e = df.apply(le.fit_transform)
 
-train = df.loc['2009/06/02':'2017/12/31']
-test = df.loc['2018/01/01':]
+train = df_e.loc['2009/06/02':'2017/12/31']
+test = df_e.loc['2018/01/01':]
 
 def a_arima(timeseries):
     
@@ -35,4 +39,4 @@ def a_arima(timeseries):
     future_forecast = pd.DataFrame(future_forecast, index = test.index, column=['Prediction'])
     pd.concat([test,future_forecast],axis=1).iplot()
     
-a_arima(df['Onview Rate'])
+a_arima(df_e['Onview Rate'])
