@@ -11,16 +11,15 @@ import pandas as pd
 
 df = pd.read_excel('timeseries.xlsx')
 
-df['Onview Rate Orig'] = df['Onview Rate'] # to save a copy of the original data..you'll see why shortly. 
-# log-transform y
-df['Onview Rate'] = np.log(df['Onview Rate'])
+df1 = pd.DataFrame(df(['Onview Rate','Date']))
 
-df['y'] = df['Onview Rate']
-df['ds'] = df['Date']
+df1['y'] = np.log(df['Onview Rate'])
 
-model = Prophet() #instantiate Prophet
-model.fit(df); #fit the model with your dataframe
+df1['ds'] = df['Date']
 
-future_data = model.make_future_dataframe(periods=190)
+model = Prophet(daily_seasonality = True) #instantiate Prophet
+model.fit(df1) #fit the model with your dataframe
 
-forecast_data = predict(future_data)
+future_data = model.make_future_dataframe(periods=6, freq = 'm')
+
+forecast_data = m.predict(future_data)
