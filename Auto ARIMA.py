@@ -6,7 +6,7 @@ Created on Tue Jul 24 14:48:21 2018
 """
 
 import numpy as np
-import pandas as pd
+from pandas import read_excel
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller
@@ -15,8 +15,7 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 import cufflinks as cf
 from pyramid.arima import auto_arima
 
-df = pd.read_excel('timeseries.xlsx')
-df.index = pd.to_datetime(df['Date'])
+df = read_excel('timeseries.xlsx', index_col=None)
 
 def a_arima(timeseries):
     
