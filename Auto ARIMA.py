@@ -5,17 +5,16 @@ Created on Tue Jul 24 14:48:21 2018
 @author: atherll
 """
 
-import numpy as np
-from pandas import read_excel
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
-from statsmodels.tsa.stattools import adfuller
-from matplotlib.pylab import rcParams
-from statsmodels.tsa.seasonal import seasonal_decompose
-import cufflinks as cf
+
+import pandas as pd
 from pyramid.arima import auto_arima
 
-df = read_excel('timeseries.xlsx', index_col=None)
+df = pd.read_excel('timeseries.xlsx')
+df.index = pd.DatetimeIndex(data = df['Date'], freq="d", start = 0, periods = 3321)
+df.drop(columns = ['Date'])
+
+train = df.loc['2009/06/02':'2017/12/31']
+test = df.loc['2018/01/01':]
 
 def a_arima(timeseries):
     
@@ -28,10 +27,6 @@ def a_arima(timeseries):
                                stepwise=True)
     print(stepwise_model.aic())
    
-    # Split into Test / Train
-    train = df.loc['2009-06-02 00:00:00':'2017-12-31 00:00:00']
-    test = df.loc['2018-01-01 00:00:00':]
-
     # Train the Model
     stepwise_model.fit(train)
     

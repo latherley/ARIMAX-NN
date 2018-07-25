@@ -11,7 +11,8 @@ from statsmodels.tsa.stattools import adfuller
 import matplotlib.pylab as plt
 from matplotlib.pylab import rcParams
 
-df = pd.read_excel('timeseries.xlsx')
+df = pd.read_excel('timeseries.xlsx', index_column = 'Date')
+df.set_index('Date')
 
 def test_stationarity(timeseries):
     
