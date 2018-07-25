@@ -11,7 +11,7 @@ from pyramid.arima import auto_arima
 
 df = pd.read_excel('timeseries.xlsx')
 df.index = pd.DatetimeIndex(data = df['Date'], freq="d", start = 0, periods = 3321)
-df.drop(columns = ['Date'])
+pd.to_datetime(df['Date'])
 
 train = df.loc['2009/06/02':'2017/12/31']
 test = df.loc['2018/01/01':]
@@ -26,7 +26,6 @@ def a_arima(timeseries):
                                suppress_warnings=True, 
                                stepwise=True)
     print(stepwise_model.aic())
-   
     # Train the Model
     stepwise_model.fit(train)
     
