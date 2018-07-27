@@ -119,3 +119,5 @@ def a_arima(timeseries):
     pd.concat([test,future_forecast],axis=1).iplot()
 
 a_arima(df['Onview Rate'])
+
+
