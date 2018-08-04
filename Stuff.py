@@ -10,6 +10,8 @@ import statsmodels.api as sm
 from statsmodels.tsa.stattools import adfuller
 import matplotlib.pylab as plt
 from matplotlib.pylab import rcParams
+from statsmodels.tsa.arima_model import ARIMA
+from statsmodels.tsa.statespace import SARIMAX
 
 df = pd.read_excel('timeseries.xlsx')
 df.index = pd.DatetimeIndex(freq="d", start = 0, periods = 3321)
@@ -120,4 +122,21 @@ def a_arima(timeseries):
 
 a_arima(df['Onview Rate'])
 
+def manual_arima(timeseries):
+
+    model = SARIMAX(timeseries, order=(5,1,0))
+    model_fit = model.fit(disp=0)
+    print(model_fit.summary())
+    # plot residual errors
+    residuals = pd.DataFrame(model_fit.resid)
+    residuals.plot()
+    pyplot.show()
+    residuals.plot(kind='kde')
+    pyplot.show()
+    print(residuals.describe())
+    
+manual_arima(df['Person Rate'])
+manual_arima(df['Property Rate'])
+manual_arima(df['Society Rate'])
+manual_arima(df['Onview Rate'])
 

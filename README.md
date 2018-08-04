@@ -17,6 +17,7 @@ https://machinelearningmastery.com/time-series-data-stationary-python/
 
 SARIMAX
 http://www.statsmodels.org/dev/examples/notebooks/generated/statespace_sarimax_stata.html
+https://www.kaggle.com/aless80/sarimax-on-mean-visits
 
 Complete Guide to Time Series
 https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/
@@ -29,3 +30,7 @@ https://en.wikipedia.org/wiki/Akaike_information_criterion
 
 Bayesian Information Criterion (BIC) fro model fit / selection 
 https://en.wikipedia.org/wiki/Bayesian_information_criterion
+
+Prophet
+https://blog.exploratory.io/is-prophet-better-than-arima-for-forecasting-time-series-fa9ae08a5851
+
